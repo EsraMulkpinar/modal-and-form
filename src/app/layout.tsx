@@ -1,12 +1,16 @@
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { ReactNode } from "react";
+import "@/styles/globals.css";
 import I18nProvider from "@/context/i18nProvider";
-import { locales, defaultLocale } from "@/i18n/i18n";
-import "../styles/globals.css";
 
-export default function RootLayout({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang={params.locale || defaultLocale}>
+    <html lang="de">
       <body>
-        <I18nProvider locale={params.locale || defaultLocale}>{children}</I18nProvider>
+        <I18nProvider>
+          <LanguageSwitcher />
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );

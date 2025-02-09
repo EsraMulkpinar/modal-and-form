@@ -5,6 +5,7 @@ import Form from "@/components/Form";
 import Modal from "@/components/Modal";
 import { useState, useEffect } from "react";
 import { ParticipantFormData } from "@/types/formTypes";
+import { useTranslations } from "next-intl";
 
 const STORAGE_KEY = "participantData";
 
@@ -27,35 +28,42 @@ export default function AddParticipant() {
     setIsEditMode(true);
     setIsModalOpen(false);
   };
-
+  const t = useTranslations("");
   return (
-    <div className="flex flex-col gap-6 bg-white rounded-2xl px-10 py-6 w-1/2 shadow-md">
-      <div className="flex justify-between items-center">
+    <div className="flex flex-col gap-6 bg-white rounded-2xl px-10 py-6 w-full md:w-1/2 shadow-md">
+      <div className="flex md:flex-row flex-col md:justify-between justify-start  md:items-center py-6">
         <h2 className="text-2xl font-semibold font-fontLato">
-          {isEditMode ? "Edit" : "Add"} Participant
+          {isEditMode ? t("edit") : t("add")} {t("participant")}
         </h2>
         <div className="flex gap-4">
-          <Button onClick={() => { setIsModalOpen(true); setIsEditMode(false); }} variant="primary">
-            {isEditMode ? "Edit" : "Add"}
+          <Button
+            onClick={() => {
+              setIsModalOpen(true);
+              setIsEditMode(false);
+            }}
+            variant="primary"
+          >
+            {isEditMode ? t("edit") : t("add")}
           </Button>
         </div>
       </div>
 
       {savedData && (
-        <div className="bg-gray-100 p-4 rounded-lg">
-          <h3 className="text-md font-semibold">Preview:</h3>
+        <div className="bg-gray-100 p-4 rounded-lg w-full">
+          <h3 className="text-md font-semibold">{t("preview")}</h3>
           <p>
-            <strong>Email:</strong> {savedData.email}
+            <strong>{t("email")}:</strong> {savedData.email}
           </p>
           <p>
-            <strong>Name:</strong> {savedData.firstName} {savedData.lastName}
+            <strong>{t("name")}:</strong> {savedData.firstName}{" "}
+            {savedData.lastName}
           </p>
           <p>
-            <strong>Address:</strong> {savedData.address}, {savedData.city},{" "}
-            {savedData.country}
+            <strong>{t("address")}:</strong> {savedData.address},{" "}
+            {savedData.city}, {savedData.country}
           </p>
           <p>
-            <strong>Phone:</strong> {savedData.phoneNumber}
+            <strong>{t("phone")}:</strong> {savedData.phoneNumber}
           </p>
         </div>
       )}
@@ -63,7 +71,7 @@ export default function AddParticipant() {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Add Participant Info"
+        title={t("title")}
       >
         <Form defaultValues={savedData || undefined} onSubmit={handleSave} />
       </Modal>
