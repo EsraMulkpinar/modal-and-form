@@ -1,32 +1,10 @@
 "use client";
-
 import { useForm } from "react-hook-form";
-import { ParticipantFormData } from "@/types/formTypes";
+import { ParticipantFormData, FormProps } from "@/types/formTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-
-const schema = yup.object().shape({
-  email: yup.string().email("Invalid email").required("Required"),
-  salutation: yup.string().required("Required"),
-  firstName: yup.string().required("Required"),
-  lastName: yup.string().required("Required"),
-  address: yup.string().required("Required"),
-  postalCode: yup.string().required("Required"),
-  city: yup.string().required("Required"),
-  country: yup.string().required("Required"),
-  phoneNumber: yup.string().required("Required"),
-  mobileNumber: yup.string().required("Required"),
-  certificateEmail: yup.string().email("Invalid email").required("Required"),
-  certificateSalutation: yup.string().required("Required"),
-  certificateFirstName: yup.string().required("Required"),
-});
-
-interface FormProps {
-  defaultValues?: ParticipantFormData;
-  onSubmit: (data: ParticipantFormData) => void;
-}
+import { schema } from "@/lib/validation";
 
 export default function Form({ defaultValues, onSubmit }: FormProps) {
   const {
@@ -54,15 +32,20 @@ export default function Form({ defaultValues, onSubmit }: FormProps) {
         <Input label="Country" {...register("country")} error={errors.country?.message} />
         <Input label="Phone Number" {...register("phoneNumber")} error={errors.phoneNumber?.message} />
         <Input label="Mobile Number" {...register("mobileNumber")} error={errors.mobileNumber?.message} />
+        </div>
+        <div className="flex-col gap-3 text-primary text-lg font-semibold px-4 py-6">Informationen für Zertifikatskurse erforderlich</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Input label="Certificate Email" {...register("certificateEmail")} error={errors.certificateEmail?.message} />
         <Input label="Certificate Salutation" {...register("certificateSalutation")} error={errors.certificateSalutation?.message} />
         <Input label="Certificate First Name" {...register("certificateFirstName")} error={errors.certificateFirstName?.message} />
       </div>
-      <div className="flex items-center mt-4">
-        <input type="checkbox" {...register("newsletter")} />
-        <label htmlFor="newsletter" className="ml-2">Also follow techtrain Newsletter.</label>
+      <div className="flex items-center p-4">
+        <input  className=" border-secondary w-5 h-5 rounded" type="checkbox" {...register("newsletter")} />
+        <label htmlFor="newsletter" className="mx-2 text-secondary text-lg font-fontLato" >Also follow techtrain Newsletter.</label>
       </div>
-      <Button onClick={() => {}} variant="primary" type="submit">Save</Button>
+      <div className="flex justify-start">
+        <Button onClick={() => {}} variant="secondary" type="submit">Save</Button>
+      </div>
     </form>
   );
 }

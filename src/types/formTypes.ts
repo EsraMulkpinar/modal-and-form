@@ -15,3 +15,7 @@ export interface ParticipantFormData {
     newsletter?: boolean;
   }
   
+export interface FormProps {
+    defaultValues?: ParticipantFormData;
+    onSubmit: (data: ParticipantFormData) => void;
+  }
