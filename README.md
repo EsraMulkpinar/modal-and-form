@@ -80,11 +80,6 @@ Tailwind CSS / Bootstrap - UI design
 
 i18next - Internationalization (i18n) support
 
-🤝 Contributing
-
-If you would like to contribute, please create a pull request or open an issue.
-
-📄 License
 
 This project is licensed under the MIT license.
 
