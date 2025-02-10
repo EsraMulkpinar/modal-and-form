@@ -7,7 +7,7 @@ const defaultLocale = "de";
 
 export default function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState(defaultLocale);
-  const [messages, setMessages] = useState<any>({});
+  const [messages, setMessages] = useState<Record<string, string>>({});
 
   useEffect(() => {
     const savedLocale = localStorage.getItem("locale") || defaultLocale;

@@ -12,7 +12,6 @@ export default function Form({ defaultValues, onSubmit }: FormProps) {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm<ParticipantFormData>({
     defaultValues,
     resolver: yupResolver(schema),

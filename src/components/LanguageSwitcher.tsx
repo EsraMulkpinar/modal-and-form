@@ -1,10 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LanguageSwitcher() {
-  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const changeLanguage = (lang: string) => {
